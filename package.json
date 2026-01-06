@@ -1,0 +1,7 @@
+{
+  "name": "gideon-ai",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ]
+}

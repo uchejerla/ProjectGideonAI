@@ -1,0 +1,24 @@
+{
+  "build": {
+    "beforeBuildCommand": "npm run build",
+    "beforeDevCommand": "npm run dev",
+    "devPath": "http://localhost:5173",
+    "distDir": "../dist"
+  },
+  "package": {
+    "productName": "Gideon AI",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "windows": [
+      {
+        "title": "Gideon AI",
+        "width": 960,
+        "height": 640
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  }
+}
