@@ -1,7 +1,7 @@
 :root {
   font-family: "Inter", system-ui, sans-serif;
   color: #111827;
-  background: #f9fafb;
+  background: #eef2ff;
 }
 
 * {
@@ -15,10 +15,117 @@ body {
 .app {
   min-height: 100vh;
   display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 32px;
+}
+
+.floating-panel {
+  width: min(360px, 100%);
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow:
+    0 12px 24px rgba(15, 23, 42, 0.12),
+    0 2px 6px rgba(15, 23, 42, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.panel-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.status-pill {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.status-idle {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.status-listening {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.status-thinking {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+.status-capturing {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.panel-description {
+  margin: 0;
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+
+.panel-controls {
+  display: flex;
   flex-direction: column;
   gap: 12px;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 32px;
+}
+
+.state-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.state-button,
+.capture-button {
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: #f3f4f6;
+  color: #111827;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.state-button:hover,
+.capture-button:hover {
+  background: #e5e7eb;
+}
+
+.state-button.is-active {
+  border-color: #6366f1;
+  background: #eef2ff;
+  color: #4338ca;
+}
+
+.capture-button {
+  background: #111827;
+  color: #f9fafb;
+}
+
+.capture-button:hover {
+  background: #1f2937;
+}
+
+.capture-button.is-active {
+  background: #dc2626;
+  color: #fef2f2;
 }
