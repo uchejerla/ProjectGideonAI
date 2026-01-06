@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Gideon Desktop</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        margin: 2rem;
+      }
+      button {
+        padding: 0.6rem 1rem;
+        font-size: 1rem;
+      }
+      #result {
+        margin-top: 1rem;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+          "Courier New", monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Project Gideon Desktop</h1>
+    <p>Capture the current screen and receive the saved file path.</p>
+    <button id="capture">Capture Screen</button>
+    <div id="result" aria-live="polite"></div>
+    <script src="main.js"></script>
+  </body>
+</html>

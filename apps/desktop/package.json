@@ -1,0 +1,9 @@
+{
+  "name": "project-gideon-desktop",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Project Gideon Desktop Tauri app",
+  "scripts": {
+    "tauri": "tauri"
+  }
+}
