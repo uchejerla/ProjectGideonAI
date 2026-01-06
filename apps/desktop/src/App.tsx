@@ -1,3 +1,4 @@
+import { invoke, convertFileSrc } from "@tauri-apps/api/tauri";
 import { useMemo, useState } from "react";
 import "./index.css";
 
@@ -19,16 +20,31 @@ const STATE_DESCRIPTIONS: Record<PanelState, string> = {
 
 export default function App() {
   const [panelState, setPanelState] = useState<PanelState>("idle");
+  const [capturePreview, setCapturePreview] = useState<string | null>(null);
+  const [captureError, setCaptureError] = useState<string | null>(null);
 
   const statusClass = useMemo(
     () => `status-pill status-${panelState}`,
     [panelState],
   );
 
-  const handleCaptureToggle = () => {
-    setPanelState((current: PanelState) =>
-      current === "capturing" ? "idle" : "capturing",
-    );
+  const handleCapture = async () => {
+    if (panelState === "capturing") {
+      return;
+    }
+
+    setPanelState("capturing");
+    setCaptureError(null);
+    try {
+      const path = await invoke<string>("capture_screen");
+      setCapturePreview(convertFileSrc(path));
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Capture failed.";
+      setCaptureError(message);
+    } finally {
+      setPanelState("idle");
+    }
   };
 
   return (
@@ -65,11 +81,23 @@ export default function App() {
                 ? "capture-button is-active"
                 : "capture-button"
             }
-            onClick={handleCaptureToggle}
+            onClick={handleCapture}
+            disabled={panelState === "capturing"}
           >
-            {panelState === "capturing" ? "Stop Capture" : "Capture"}
+            {panelState === "capturing" ? "Capturing..." : "Capture"}
           </button>
         </div>
+        {captureError && <p className="panel-error">{captureError}</p>}
+        {capturePreview && (
+          <div className="capture-preview">
+            <span className="preview-label">Latest capture</span>
+            <img
+              className="preview-image"
+              src={capturePreview}
+              alt="Latest screen capture"
+            />
+          </div>
+        )}
       </section>
     </main>
   );
